@@ -13,4 +13,22 @@ const validateSignupData = (req) => {
     throw new Error("Password is not strong");
   }
 };
-module.exports = validateSignupData;
+
+const validateEditFields = (req) => {
+  const allowedEditFields = [
+    "firstname",
+    "lastName",
+    "age",
+    "gender",
+    "skills",
+    "photoUrl",
+    "about",
+  ];
+
+  const isEditAllowed = Object.keys(req.body).every((field) =>
+    allowedEditFields.includes(field),
+  );
+  return isEditAllowed;
+};
+
+module.exports = { validateSignupData, validateEditFields };
